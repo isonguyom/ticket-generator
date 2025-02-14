@@ -1,25 +1,9 @@
-import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function TopNav() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const menuRef = useRef(null);
-
-  // Close menu when clicking outside
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setMenuOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
   return (
     <nav className="w-full bg-[#05252C] border border-[#197686] rounded-[12px] md:rounded-[24px] text-[#B3B3B3] p-3 md:px-4 relative">
       <div className="container mx-auto flex justify-between items-center gap-x-4">
-        
         {/* Logo */}
         <Link to="/" className="text-2xl font-bold text-[#24A0B5]">
           <img src="/logo.svg" alt="Logo" className="h-10 w-auto" />
@@ -30,10 +14,16 @@ export default function TopNav() {
           {["Events", "My Tickets", "About", "Project"].map((item, index) => (
             <li key={index}>
               <Link
-                to={item === "Events" ? "/" : `/${item.toLowerCase().replace(/\s+/g, "")}`}
+                to={
+                  item === "Events"
+                    ? "/"
+                    : `/${item.toLowerCase().replace(/\s+/g, "")}`
+                }
                 className={`hover:text-white text-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#24A0B5] px-3 py-2 rounded-md ${
-                    item === "Events" ? "text-white" : "text-[#B3B3B3] hover:text-white"
-                  }`}
+                  item === "Events"
+                    ? "text-white"
+                    : "text-[#B3B3B3] hover:text-white"
+                }`}
               >
                 {item}
               </Link>
@@ -61,7 +51,6 @@ export default function TopNav() {
             />
           </svg>
         </button>
-
       </div>
     </nav>
   );
