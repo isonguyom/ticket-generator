@@ -27,7 +27,7 @@ export default function Ticket() {
         </div>
 
         <div className="p-6 pb-2 mx-auto ticket flex flex-col justify-between gap-y-[32px] w-full max-w-[300px] h-fit bg-[url('/bg.svg')] bg-contain bg-no-repeat bg-center">
-          <div className="bg-[#031e211a] border border-[#24A0B5] rounded-[16px] p-3 flex flex-col gap-y-4">
+          <div className="bg-[#031e211a] border border-[#24A0B5] rounded-[16px] p-3 flex flex-col gap-y-2">
             <div className="text-center">
               <h2 className="text-4xl road-rage">Techember Fest ”25</h2>
               <p className="text-xs">📍 04 Rumens road, Ikoyi, Lagos</p>
@@ -71,7 +71,7 @@ export default function Ticket() {
               <div className="flex flex-col p-[4px] gap-y-[4px] pt-[8px]">
                 <label className="block text-xs">Special request?</label>
                 <p className="text-xs text-white font-bold">
-                {ticketData.request}
+                  {ticketData.request}
                 </p>
               </div>
             </div>
