@@ -8,12 +8,12 @@ export default function App() {
   return (
     <Router>
       <div className="w-full py-3 px-4">
-       <TopNav />
-      <Routes>
-        <Route path="/" element={<TicketType />} />
-        <Route path="/attendee-details" element={<AttendeeDetails />} />
-        <Route path="/ticket" element={<Ticket />} /> 
-      </Routes>
+        <TopNav />
+        <Routes>
+          <Route path="/" element={<TicketType />} />
+          <Route path="/attendee-details" element={<AttendeeDetails />} />
+          <Route path="/ticket" element={<Ticket />} />
+        </Routes>
       </div>
     </Router>
   );

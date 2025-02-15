@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 
 export default function CustomImageUpload({ imageUrl, onImageSelect }) {
-  const [imagePreview, setImagePreview] = useState(imageUrl || null);
+  const [imagePreview, setImagePreview] = useState(imageUrl);
   const [isHovered, setIsHovered] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
@@ -163,6 +163,12 @@ export default function CustomImageUpload({ imageUrl, onImageSelect }) {
               )}
             </div>
           )}
+
+{/* <img
+                src={imagePreview}
+                alt="Uploaded preview"
+                className="w-full h-full block border-2 border-[#24A0B5] rounded-[32px] border-opacity-50"
+              /> */}
         </div>
       </div>
     </div>

@@ -31,10 +31,10 @@ body {
 }
 
 .road-rage {
-font-family: var(--font-road-rage)
+  font-family: var(--font-road-rage)
 }
 
 .bg-radial1 {
   background: radial-gradient(#249fb520, #249fb500);
-  background-color:rgba(10, 12, 17, 0.16);
+  background-color: rgba(10, 12, 17, 0.16);
 }

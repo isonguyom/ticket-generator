@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import html2canvas from "html2canvas";
 import { loadFromStorage } from "../utils/storage";
 import Wrapper from "../components/Wrapper";
 
 export default function Ticket() {
   const [ticketData, setTicketData] = useState(null);
   const navigate = useNavigate();
+  const ticketRef = useRef(null);
 
   useEffect(() => {
     const savedData = loadFromStorage("ticket-form");
@@ -16,6 +18,24 @@ export default function Ticket() {
   if (!ticketData)
     return <p className="text-center mt-10">Loading ticket...</p>;
 
+  const downloadTicket = async () => {
+    if (!ticketRef.current) return;
+
+    try {
+      const canvas = await html2canvas(ticketRef.current, {
+        backgroundColor: null, // Transparent background
+        scale: 2, // Increase quality
+      });
+
+      const link = document.createElement("a");
+      link.href = canvas.toDataURL("image/png");
+      link.download = `Techember_Ticket_${ticketData.fullName}.png`;
+      link.click();
+    } catch (error) {
+      console.error("Error generating ticket image:", error);
+    }
+  };
+
   return (
     <Wrapper step={3} label={"Ready"}>
       <div className="">
@@ -23,10 +43,14 @@ export default function Ticket() {
           <h2 className="font-bold text-2xl mb-[12px]">
             Your Ticket is Booked!
           </h2>
-          <p className="">You can download or Check your email for a copy</p>
+          <p className="">You can download or check your email for a copy</p>
         </div>
 
-        <div className="p-6 pb-2 mx-auto ticket flex flex-col justify-between gap-y-[32px] w-full max-w-[300px] h-fit bg-[url('/bg.svg')] bg-contain bg-no-repeat bg-center">
+        {/* Ticket Div */}
+        <div
+          ref={ticketRef}
+          className="p-6 pb-2 mx-auto ticket flex flex-col justify-between gap-y-[32px] w-full max-w-[300px] h-fit bg-[url('/bg.svg')] bg-contain bg-no-repeat bg-center"
+        >
           <div className="bg-[#031e211a] border border-[#24A0B5] rounded-[16px] p-3 flex flex-col gap-y-2">
             <div className="text-center">
               <h2 className="text-4xl road-rage">Techember Fest ”25</h2>
@@ -90,9 +114,11 @@ export default function Ticket() {
           </div>
         </div>
 
+        {/* Download and Book Another Ticket Buttons */}
         <div className="mt-[32px] flex flex-col md:flex-row gap-[8px]">
           <button
-            type="submit"
+            type="button"
+            onClick={downloadTicket}
             className="w-full md:order-2 bg-[#24A0B5] text-white p-3 rounded-[8px] font-jeju cursor-pointer"
           >
             Download Ticket
